@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Software - YouTube and GitHub</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+        iframe {
+            width: 560px;
+            height: 315px;
+            margin: 20px 0;
+        }
+        .github-repos {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .repo {
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 250px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Home Software Project</h1>
+</header>
+
+<div class="content">
+    <h2>Watch our YouTube Tutorials</h2>
+    <iframe src="https://www.youtube.com/embed/your-video-id" frameborder="0" allowfullscreen></allowfullscreen></iframe>
+
+    <h2>Related GitHub Repositories</h2>
+    <div class="github-repos">
+        <!-- GitHub Repositories will be displayed here -->
+    </div>
+</div>
+
+<script>
+// Function to fetch GitHub repositories
+const githubUsername = 'your-github-username';
+const githubApiUrl = `https://api.github.com/users/${githubUsername}/repos`;
+
+fetch(githubApiUrl)
+    .then(response => response.json())
+    .then(data => {
+        const repoContainer = document.querySelector('.github-repos');
+        data.forEach(repo => {
+            const repoElement = document.createElement('div');
+            repoElement.classList.add('repo');
+            repoElement.innerHTML = `
+                <h3>${repo.name}</h3>
+                <p>${repo.description}</p>
+                <a href="${repo.html_url}" target="_blank">View on GitHub</a>
+            `;
+            repoContainer.appendChild(repoElement);
+        });
+    });
+</script>
+
+</body>
+</html>
